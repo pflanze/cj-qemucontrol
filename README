@@ -7,8 +7,10 @@ This assumes that:
 - every qemu instance has a name, the "servicename", which is to be
   passed to the _qemu-suspend and _qemu-sendkey scripts and set in the
   $servicename-settings.scm script. So, to create a new configuration,
-  take the files in exampleconfig/ and replace the string "windows2000"
-  in the files and their file names with the service name you want.
+  take the files in exampleconfig/, putting them to the cj-qemucontrol
+  directory (which is meant to be added to PATH) and replace the
+  string "windows2000" in the files and their file names with the
+  service name you want.
 
 - ~/tmp exists (it probably should have 0700 permissions)
 
