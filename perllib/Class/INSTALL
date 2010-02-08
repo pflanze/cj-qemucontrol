@@ -1,0 +1,14 @@
+The usual 
+  perl Makefile.PL
+  make
+  make install
+
+If you want to make use of Class::Array::Exception, Error::Filter (from me)
+should be installed, too. And if you want to use Class::Array::WithDBI,
+DBI has to be installed, of course. I don't know how to handle this in
+a clean (optional) way, so currently the above modules will be installed regardless
+of whether the dependencies are satisfied and you have to install
+the latter manually, sorry about that.
+
+If you want to use Class::Array::XMLException with AxKit, don't miss the
+files in the goodies/Axkit/ directory.

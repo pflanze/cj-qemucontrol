@@ -1,0 +1,12 @@
+*~
+.gitignore
+
+qemu-img
+qemu-nbd
+qemu-system-x86_64
+ntfsreloc
+
+/windows2000
+/windows2000-settings.scm
+/windows2000-smp
+/windows2000-suspend

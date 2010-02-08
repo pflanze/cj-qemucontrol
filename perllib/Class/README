@@ -1,0 +1,27 @@
+Make perl5 better for object oriented programming
+
+Fast objects with access rules and typo protection.
+Includes base classes for efficient DBI and exception handling
+(the latter designed for use with Error::Filter).
+
+(NOTES:
+
+- this was written in 2001/2002; I've been using it ever since, but:
+
+- it doesn't support multiple inheritance, or at least not well, which
+  can be a hinderance
+
+- there have popped up tons of OO frameworks since; I can't vouch for
+  any of them
+
+- for a new small project, I've decided to write a simple new OO
+  framework from scratch, which does support checked keyword arguments
+  to constructors, supports multiple inheritance, has some nice tools
+  for creating classes on the fly, and is, I think simple; based on
+  hashes again, but autogenerating accessors (looses compile time typo
+  checking, but since it's mostly better to use accessor methods
+  anyway, that isn't such big of a drawback). ATM it's part of:
+   http://www.christianjaeger.ch/dyn/pubgit/gitweb?p=intergit.git;a=summary
+   git clone http://christianjaeger.ch/pubgit/intergit.git
+
+)

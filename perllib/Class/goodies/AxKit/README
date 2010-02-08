@@ -1,0 +1,27 @@
+AxKit (as of 1.51) doesn't handle exceptions that it doesn't know very nicely,
+it just prints them to the log and lets the standard internal server error
+page be returned.
+
+With the accompanying patch it will do better, and call the 'as_errorxml'
+method on the exception object if available. When you use
+Class::Array::XMLException as base class for your exceptions, this will give
+nice reports in the browser.
+
+Unlike standard axkit exceptions, Class::Array::XMLException based exceptions
+don't record stacktrace information by default. To switch these on, put this
+into your startup.pl (make sure startup.pl is loaded by apache, by means of
+something like 'PerlRequire /usr/local/apache/conf/startup.pl' in your
+httpd.conf):
+
+ require Class::Array::XMLException;
+ Class::Array::XMLException->set_stacktrace(record=>1);
+
+(Note that for some yet unknown reason you shouldn't 'use' instead of
+require, or your apache will enter an infinite loop currently.)
+
+You should also use an error stylesheet that can make use of the 
+'<rethrown></rethrown>' xml tags, like the enclosed 'error.xps'.
+
+See also perldoc Class::Array::XMLException for more info.
+
+Christian, 27 Apr 2002

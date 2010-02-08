@@ -1,0 +1,3 @@
+#!/bin/bash
+
+_qemu-suspend windows2000

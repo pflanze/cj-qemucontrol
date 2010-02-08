@@ -1,0 +1,63 @@
+Revision history for Perl extension Class::Array.
+
+0.06b1
+	- added make_sthreader method to Class::Array::WithDBI
+
+pre7
+pre6
+
+0.05pre5  
+	- ucfirstletter / lcfirstletter instead of ucfirst / lcfirst
+	- ç unfinished dump routine which should pretty-dump obj.
+	- end Package routine returns true so it can be the last in a module.
+
+
+0.05pre4  Mon,  1 Nov 2004 21:34:02 +0100
+	- introduced class_array_conformize conformize-fieldname
+	  functionality: now you can define fields all-lowercase if
+	  you want and it'll ucfirst them for you.
+
+
+0.05pre3  Sun, 31 Oct 2004 13:22:22 +0100
+	- added -publica field type, and createaccessors function
+	- added end function/method ('end Class::Array'),
+	  which is itself calling stuff like createaccessors
+	- now when subclasses define a field that already has been
+	  defined by a parent class as a public/publica/protected
+	  field, it is just shadowed (doesn't conflict anymore).
+	  Even for exports (public fields) the new field shadows the old.
+	  publica fields only shadow public fields inside subclasses,
+	  not for exports, where still only public fields play a role.
+	  (publica fields though are, as is usual for methods of course,
+	  shadowing as usual, but well, they are not overshadowed themselves
+	  by public fields since the latter do not create accessors! heh.)
+	  (it's like public and publica are two separate 'namespaces')(right?)
+
+
+(Thu, 11 Apr 2002 09:40:55 +0200
+Starting from 0.04pre12, the ExceptionFilter.pm has been 
+changed to Error::Filter.pm)
+
+0.05pre1 Fri, 11 Apr 2003 18:54:15 +0200
+	- fixed for multiple inheritance (added _CLASS_ARRAY_SUPERCLASS
+	  variable to each class)
+
+0.03  Mon, 17 Dec 2001 03:08:05 +0100
+	- Added default destructor.
+	- Documentation fixes
+	- Added "goodies" folder.
+	- Bumped version number up to 0.03 since I erroneously put up
+	  Class-Array-0.02.tar.gz on our website on 06-Oct-2001 18:23
+
+0.02pre2
+	- Renamed `-shared' option to `-protected' (but left -shared also valid)
+	- Renamed `members' to `fields' (old names still usable)
+
+0.02pre1
+	- Changed license to the normal Artistic/GPL mix
+	- Added `-shared' option and made it the default member type.
+
+0.01  Thu Jul 26 00:49:02 CEST 2001
+	- initial version, used internally
+	(unpackaged version announced on axkit-users list)
+

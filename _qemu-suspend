@@ -1,0 +1,74 @@
+#!/usr/bin/perl -w
+
+# Thu Jul  2 14:48:32 EDT 2009
+(my $email='chrjae%gmail,com')=~ tr/%,/@./;
+
+use strict;
+
+my ($mydir, $myname);
+BEGIN {
+    $0=~ /(.*?)([^\/]+)\z/s or die "?";
+    ($mydir, $myname)=($1,$2);
+}
+use lib "$mydir/perllib";
+
+sub usage {
+    print STDERR map{"$_\n"} @_ if @_;
+    print "$myname servicename
+
+  (Christian Jaeger <$email>)
+";
+exit (@_ ? 1 : 0);
+}
+
+use Getopt::Long;
+our $verbose=0;
+GetOptions("verbose"=> \$verbose,
+	   "help"=> sub{usage},
+	   ) or exit 1;
+usage unless @ARGV==1;
+
+our ($servicename)=@ARGV;
+
+
+{
+    package Chj::App::QemumonitorSuspend;
+    use Chj::App::Qemumonitor -extend=>
+      -publica=>
+	;
+    sub statefile {
+	my $s=shift;
+	$s->servicefolder."/STATEFILE.gz"
+    }
+    sub statefile_tmp {
+	my $s=shift;
+	$s->statefile.".tmp";
+    }
+
+    use Chj::singlequote 'singlequote_sh';
+
+    sub migratecommand {
+	my $s=shift;
+	'migrate "exec:gzip --fast -c > '.singlequote_sh($s->statefile_tmp).'"'
+    }
+
+    end Class::Array;
+}
+
+our $m= Chj::App::QemumonitorSuspend->new($servicename);
+$m->set_verbose(1) if $verbose;#wl. keyword passing. or.  hh oldie.
+
+use Chj::xperlfunc;
+
+$m->send("stop");
+# NOTE: seems the poll is not necessary anymore because of the way I'm
+# handling the sockets now, but I'm leaving it in anyway for now.
+$m->poll_with_for("info status", qr/VM status: paused/);
+$m->send($m->migratecommand);#((n defekt. dass nid inside. selberselber.))
+$m->poll_with_for("info migrate", qr/Migration status: completed/);
+xrename $m->statefile_tmp, $m->statefile;
+$m->send("quit");
+
+#use Chj::ruse;
+#use Chj::Backtrace;
+#use Chj::repl; repl;

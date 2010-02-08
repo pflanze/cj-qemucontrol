@@ -1,0 +1,6 @@
+#!/usr/bin/env gsi-script
+
+(include "qemu.scm")
+(include "windows2000-settings.scm")
+(define smp 2)
+(qemu)

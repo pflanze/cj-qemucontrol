@@ -1,0 +1,5 @@
+Put these files into some convenient location like /usr/local/bin.
+Edit newperl.lib to suit your needs.
+
+They will give you nice templates to work with Class::Array.
+

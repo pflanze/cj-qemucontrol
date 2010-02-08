@@ -1,0 +1,102 @@
+Speed results:
+---------------
+(use constant ANZOBJ=> 10000;
+use constant ANZITER=> 100000;)
+
+chris@G3 t > ./speedtest_hash.pl
+Step 1: 0.264108061790466
+Step 2: 5.6385749578476
+chris@G3 t > ./speedtest_hash.pl
+Step 1: 0.267836928367615
+Step 2: 5.6886340379715
+chris@G3 t > ./speedtest_hash.pl
+Step 1: 0.299815058708191
+Step 2: 5.51392090320587
+
+
+chris@G3 t > ./speedtest_array.pl
+Step 1: 0.293471932411194
+Step 2: 5.28328108787537
+chris@G3 t > ./speedtest_array.pl
+Step 1: 0.289607048034668
+Step 2: 5.27212500572205
+chris@G3 t > ./speedtest_array.pl
+Step 1: 0.292579054832458
+Step 2: 5.41358995437622
+chris@G3 t > 
+
+
+chris@G3 t > ./speedtest_array_realconstant.pl
+Step 1: 0.291193008422852
+Step 2: 5.27445197105408
+chris@G3 t > ./speedtest_array_realconstant.pl
+Step 1: 0.290555953979492
+Step 2: 5.40502893924713
+chris@G3 t > ./speedtest_array_realconstant.pl
+Step 1: 0.292360067367554
+Step 2: 5.28830599784851
+chris@G3 t >
+
+
+chris@G3 t > ./speedtest_array_notconstant.pl
+Step 1: 0.396031022071838
+Step 2: 11.9981939792633
+chris@G3 t > ./speedtest_array_notconstant.pl
+Step 1: 0.399051904678345
+Step 2: 12.1493080854416
+chris@G3 t > ./speedtest_array_notconstant.pl
+Step 1: 0.399729013442993
+Step 2: 12.1426559686661
+
+
+chris@G3 t > ./speedtest_array_constant_withprototypes.pl
+Step 1: 0.290248036384583
+Step 2: 5.37565994262695
+chris@G3 t > ./speedtest_array_constant_withprototypes.pl
+Step 1: 0.289891958236694
+Step 2: 5.2943639755249
+chris@G3 t > ./speedtest_array_constant_withprototypes.pl
+Step 1: 0.288447976112366
+Step 2: 5.2930999994278
+
+
+==> OK, my implementation with closures seems to work ok (it's as fast as
+prototyped real subs with constant therein, or plain numbers instead). (What about memory?)
+
+
+
+Memory results:
+---------------
+10_000 objects:
+
+chris    11708 18.2  1.3  5348 3460 pts/9    S    20:14   0:05 /usr/bin/perl -w ./speedtest_array_constant_withprototypes.pl
+chris    11767 65.4  1.5  5804 3904 pts/9    S    20:16   0:05 /usr/bin/perl -w ./speedtest_hash.pl
+chris    11792 78.3  1.3  5348 3464 pts/9    S    20:17   0:12 /usr/bin/perl -w ./speedtest_array_notconstant.pl
+chris    11821 63.3  1.3  5348 3460 pts/9    S    20:18   0:05 /usr/bin/perl -w ./speedtest_array_realconstant.pl
+chris    11842 72.3  1.3  5348 3460 pts/9    S    20:19   0:05 /usr/bin/perl -w ./speedtest_array.pl
+
+==> OK, arrays save some memory (even in the 1 char string case).
+
+With only 1 object:
+chris    11954 10.9  0.6  3560 1660 pts/9    S    20:23   0:01 /usr/bin/perl -w ./speedtest_hash.pl
+chris    12001 31.0  0.7  3776 1888 pts/9    S    20:25   0:01 /usr/bin/perl -w ./speedtest_array.pl
+chris    12026 16.5  0.7  3776 1888 pts/9    S    20:26   0:01 /usr/bin/perl -w ./speedtest_array_constant_withprototypes.pl
+
+of course, the latter two take the same space, as I didn't remove the 'use Class::Array' call.
+Without 'use Class::Array':
+
+chris    12073 16.2  0.6  3640 1752 pts/9    S    20:28   0:01 /usr/bin/perl -w ./speedtest_array_constant_withprototypes.pl
+
+(hmm? takes more place than hash version)
+Version of real constant without 'use Class::Array':
+
+chris    12129 22.8  0.6  3636 1748 pts/9    S    20:30   0:01 /usr/bin/perl -w ./speedtest_array_realconstant.pl
+
+
+==> Class::Array takes 136kb of space. (Hmmm, Array.pm is 17kb in size including pod documentation.!)
+
+==> 10_000 Hash based objects take 2244 kb, or 230 bytes each.
+
+==> 10_000 Array based objects take 1572 kb, or 161 bytes each. (only takes 70% of hashes' memory)
+
+(Hmm, an object in C++ probably only would take about 4*3+4=16 bytes?..)
