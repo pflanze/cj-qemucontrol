@@ -33,6 +33,7 @@
 (define win2k-hack? #t)
 (define soundhw #f)
 ;;(define virtual-memory-limit 1200000)
+;;(define qemupath "qemu-system-x86_64")
 
 ;; If you need to add random other options, you can use:
 ;; (add-options! "-someoptionwithvalue" "optionvalue")

@@ -111,13 +111,14 @@
 (define use-tablet #f)
 (define win2k-hack? #f)
 (define soundhw #f)
+(define qemupath "qemu-system-x86_64")
 
 (define (script)
   (define monitorpath (a "unix:"monitorfile",server,nowait"))
   (define tablet (if use-tablet "-usbdevice tablet" ""))
   (let ((qemucmdline
 	 (apply j
-		`("qemu-system-x86_64"
+		`(,qemupath
 		  "-no-quit"
 		  "-monitor" ,(q monitorpath)
 		  "-alt-grab"
