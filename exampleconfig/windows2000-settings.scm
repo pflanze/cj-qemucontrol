@@ -25,3 +25,8 @@
 (define win2k-hack? #t)
 (define ram-MB 384)
 (define soundhw #f)
+
+;; If you need to add random other options, you can use:
+;; (add-options! "-someoptionwithvalue" "optionvalue")
+;; or just
+;; (add-options! "-someoptionwithoutvalue")
