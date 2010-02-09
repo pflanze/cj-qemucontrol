@@ -22,13 +22,17 @@
 ;; then uncomment the following line:
 ;; (define dry-run? #t)
 
+;; required settings:
 (define servicename "windows2000")
 (define diskpath "/dev/plain/windows2000")
+(define ram-MB 384)
+
+;; optional settings (can be removed or set to #f):
 (define redirections "-redir tcp:3022::22")
 (define use-tablet #t)
 (define win2k-hack? #t)
-(define ram-MB 384)
 (define soundhw #f)
+;;(define virtual-memory-limit 1200000)
 
 ;; If you need to add random other options, you can use:
 ;; (add-options! "-someoptionwithvalue" "optionvalue")

@@ -107,6 +107,11 @@
   ;; (could add then reverse in the end instead)
   (set! options (append options args)))
 
+(define redirections #f)
+(define use-tablet #f)
+(define win2k-hack? #f)
+(define soundhw #f)
+
 (define (script)
   (define monitorpath (a "unix:"monitorfile",server,nowait"))
   (define tablet (if use-tablet "-usbdevice tablet" ""))
@@ -129,7 +134,7 @@
 		  ,(if smp (j "-smp" (->string smp)) "")
 		  ,(if soundhw (j "-soundhw" soundhw "hda") "") ;; still dunno what the hda is for.
 		  ,tablet
-		  ,redirections
+		  ,(or redirections "")
 		  ,@options))))
     (xbash
      (b:limits)
