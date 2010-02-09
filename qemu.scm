@@ -141,7 +141,7 @@
      (if (-f statefile)
 	 (lines "("
 		(j "gzip -c -d" (q statefile))
-		(j "mv" statefile (q (a statefile ".old")))
+		(j "mv" (q statefile) (q (a statefile ".old")))
 		(j ") |" qemucmdline "-incoming" (q "exec: cat") "\"$@\""))
 	 (j "exec" qemucmdline "\"$@\"")))))
 
