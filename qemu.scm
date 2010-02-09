@@ -157,11 +157,14 @@
 (define statefile #f)
 (define monitorfile #f)
 
+(define dry-run? #f)
+
 (define (qemu)
   (define servicefolder (~ (a "tmp/" servicename)))
   (set! monitorfile (a servicefolder "/monitor"))
   (set! statefile (a servicefolder "/STATEFILE.gz"))
 
-  '(println (script))
-  (apply bash-command (script) (command-line)))
+  (if dry-run? 
+      (println (script))
+      (apply bash-command (script) (command-line))))
 

@@ -18,6 +18,10 @@
 ;; windows2000-smp files as examples) you can adapt the settings
 ;; selectively to different usages.
 
+;; If you want to see what is going to be executed in bash syntax,
+;; then uncomment the following line:
+;; (define dry-run? #t)
+
 (define servicename "windows2000")
 (define diskpath "/dev/plain/windows2000")
 (define redirections "-redir tcp:3022::22")
