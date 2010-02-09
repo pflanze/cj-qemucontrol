@@ -7,7 +7,7 @@ This assumes that:
 - every qemu instance has a name, the "servicename", which is to be
   passed to the _qemu-suspend and _qemu-sendkey scripts and set in the
   $servicename-settings.scm script. So, to create a new configuration,
-  take the files in exampleconfig/, putting them to the cj-qemucontrol
+  copy the files from exampleconfig/ to the cj-qemucontrol/
   directory (which is meant to be added to PATH) and replace the
   string "windows2000" in the files and their file names with the
   service name you want.
@@ -19,7 +19,7 @@ This assumes that:
 - the qemu binary name is "qemu-system-x86_64" (change it in qemu.scm)
 
 - perl and the Gambit scheme systems are installed; Gambit is packaged
-  in Debian, but also available for other systems as source or binaries
-  on the Gambit home page.
+  in Debian/Ubuntu/Gentoo, but also available for other systems as
+  source or binaries on the Gambit home page.
 
 Christian Jaeger <chrjae@gmail.com>
