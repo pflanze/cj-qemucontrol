@@ -6,12 +6,12 @@
 
 ;; You can create definitions on your own, too (better start your own
 ;; variables with an underscore to avoid potential conflicts), and use
-;; them in later ones, for example
+;; them in later definitions, for example
 ;;  (define _basedir "/my/base/directory/")
 ;;  (define diskpath (string-append _basedir "hda.img"))
 ;;  instead of string-append you can also just use the letter a:
 ;;  (define diskpath (a _basedir "hda.img"))
-;; You can prepend a string with your home directory by using the ~ function:
+;; You can prepend a string with your home directory path by using the ~ function:
 ;;  (define diskpath (~ "images/hda")) ;; where images is a subdir of your home
 
 ;; By including this file into others (see the windows2000 and
@@ -25,6 +25,12 @@
 ;; required settings:
 (define servicename "windows2000")
 (define diskpath "/dev/plain/windows2000")
+;; or (define diskpath (list "somepath" "someotherpath")), up to three
+;; (or four if no cdrom is used) of them, they will be fed as -hda,
+;; -hdb, -hdd, then -hdc in turn (in case you want to change the order
+;; of how those are being used, you could re-define the driveoptions
+;; variable as part of your settings (check qemu.scm how it should
+;; look)).
 (define ram-MB 384)
 
 ;; optional settings (can be removed or set to #f):
@@ -32,6 +38,8 @@
 (define use-tablet #t)
 (define win2k-hack? #t)
 (define soundhw #f)
+
+;; optional settings (they have default values, but can't be set to #f):
 ;;(define virtual-memory-limit 1200000)
 ;;(define qemupath "qemu-system-x86_64")
 
