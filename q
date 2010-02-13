@@ -15,6 +15,6 @@
 (include "scmlib/qemu.scm")
 
 (eval
- `(include ,(string-append (~/ ".cj-qemucontrol/") servicename ".scm")))
+ `(include ,(a ~/ ".cj-qemucontrol/" servicename ".scm")))
 
 (qemu)

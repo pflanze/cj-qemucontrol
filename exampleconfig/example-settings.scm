@@ -18,8 +18,8 @@
 ;;  (define diskpath (string-append _basedir "hda.img"))
 ;;  instead of string-append you can also just use the letter a:
 ;;  (define diskpath (a _basedir "hda.img"))
-;; You can prepend a string with your home directory path by using the ~/ function:
-;;  (define diskpath (~/ "images/hda")) ;; where images is a subdir of your home
+;; You can refer to your home directory path by using the ~/ variable:
+;;  (define diskpath (a ~/ "images/hda")) ;; where images is a subdir of your home
 
 ;; By including this file into others (see the example.scm and
 ;; example-smp.scm files as examples) you can adapt the settings
