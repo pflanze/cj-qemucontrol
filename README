@@ -1,25 +1,44 @@
 Programs to suspend running qemu instances from the command line, and
 to start the instances so that they can be suspended, and resume them
-from saved images automatically if possible.
+from saved images automatically if there is a saved image.
 
-This assumes that:
+Installation:
 
-- every qemu instance has a name, the "servicename", which is to be
-  passed to the _qemu-suspend and _qemu-sendkey scripts and set in the
-  $servicename-settings.scm script. So, to create a new configuration,
-  copy the files from exampleconfig/ to the cj-qemucontrol/
-  directory (which is meant to be added to PATH) and replace the
-  string "windows2000" in the files and their file names with the
-  service name you want.
+- perl and the Gambit-C scheme systems are required; Gambit is
+  packaged in Debian/Ubuntu/Gentoo, but also available for other
+  systems as source or binaries on the Gambit home page.
 
-- ~/tmp exists (it probably should have 0700 permissions)
+- place the cj-qemucontrol directory wherever you like, and add it's
+  path to the PATH environment variable
 
-- ~/tmp/$servicename exists as well
+Configuration:
 
-- the qemu binary name is "qemu-system-x86_64" (change it in qemu.scm)
+There can be multiple configurations per user; each configuration has
+a name, the "servicename". A configuration consists of (replace
+$servicename with the actual string you have choosen):
 
-- perl and the Gambit scheme systems are installed; Gambit is packaged
-  in Debian/Ubuntu/Gentoo, but also available for other systems as
-  source or binaries on the Gambit home page.
+- a file ~/.cj-qemucontrol/$servicename.scm
+
+  See exampleconfig/example.scm and exampleconfig/example-smp.scm for
+  examples of configurations that share a common base
+  configuration from exampleconfig/example-settings.scm; read the
+  documentation in the latter file.
+
+- a directory ~/tmp/$servicename
+
+  Create this directory with the right protections to avoid giving
+  other users access to your qemu instance:
+
+    ( umask 077; mkdir -p ~/tmp/$servicename )
+
+The programs assume that you mean the configuration with servicename
+"default" if none is specified. This is practical when using a
+separate unix user per configuration, in this case just configure the
+service as "default" and you don't ever have to specify the
+servicename.
+
+The qemu binary name is "qemu-system-x86_64" by default, override in
+the configuration (or change it in qemu.scm).
+
 
 Christian Jaeger <chrjae@gmail.com>
