@@ -2,6 +2,7 @@ Programs to suspend running qemu instances from the command line, and
 to start the instances so that they can be suspended, and resume them
 from saved images automatically if there is a saved image.
 
+
 Installation:
 
 - perl and the Gambit-C scheme systems are required; Gambit is
@@ -10,6 +11,7 @@ Installation:
 
 - place the cj-qemucontrol directory wherever you like, and add it's
   path to the PATH environment variable
+
 
 Configuration:
 
@@ -39,6 +41,24 @@ servicename.
 
 The qemu binary name is "qemu-system-x86_64" by default, override in
 the configuration (or change it in qemu.scm).
+
+
+Usage:
+
+ q [servicename]
+
+   start instance with control socket so that it can be suspended,
+   resuming from image if present.
+
+ qsuspend [servicename]
+
+   suspend instance
+
+ qsendkey-to servicename key(s)
+ qsendkey key(s)
+
+   send keyboard signals, especially worthwhile for keys that can't be typed in
+   normally like ctrl-alt-f1
 
 
 Christian Jaeger <chrjae@gmail.com>
