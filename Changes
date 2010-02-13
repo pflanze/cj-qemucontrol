@@ -5,6 +5,7 @@ User-visible changes since 2010-02-08
 - configuration changes: 
   - ~ has been renamed to ~/ and to be a string instead of a function
   - use-tablet has been renamed to use-tablet?
+  - diskpath has been renamed to diskpaths
 
 - the order of allocation of ide drives has changed; this means that
   fstab entries inside the qemu instances may need to be changed!!

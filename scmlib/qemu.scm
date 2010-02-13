@@ -121,14 +121,14 @@
 		  "-monitor" ,(q monitorpath)
 		  "-alt-grab"
 		  ,(if win2k-hack? "-win2k-hack" "")
-		  ,@(if (list? diskpath)
+		  ,@(if (list? diskpaths)
 			(map-accepting-shorter-lis2
 			 (lambda (driveoption path)
 			   (j driveoption (q path)))
 			 driveoptions
-			 diskpath)
+			 diskpaths)
 			;; and the backward-compatible way (common-lispy right..)
-			(list (j (car driveoptions) (q diskpath))))
+			(list (j (car driveoptions) (q diskpaths))))
 		  "-m" ,(q (->string ram-MB))
 		  ,(if smp (j "-smp" (->string smp)) "")
 		  ,(if soundhw (j "-soundhw" soundhw "hda") "") ;; still dunno what the hda is for.

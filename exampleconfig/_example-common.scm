@@ -15,11 +15,11 @@
 ;; variables with an underscore to avoid potential conflicts), and use
 ;; them in later definitions, for example
 ;;  (define _basedir "/my/base/directory/")
-;;  (define diskpath (string-append _basedir "hda.img"))
+;;  (define diskpaths (string-append _basedir "hda.img"))
 ;;  instead of string-append you can also just use the letter a:
-;;  (define diskpath (a _basedir "hda.img"))
+;;  (define diskpaths (a _basedir "hda.img"))
 ;; You can refer to your home directory path by using the ~/ variable:
-;;  (define diskpath (a ~/ "images/hda")) ;; where images is a subdir of your home
+;;  (define diskpaths (a ~/ "images/hda")) ;; where images is a subdir of your home
 
 ;; By including this file into others (see the example.scm and
 ;; example-smp.scm files as examples) you can adapt the settings
@@ -30,8 +30,8 @@
 ;; (define dry-run? #t)
 
 ;; required settings:
-(define diskpath "/dev/plain/windows2000")
-;; or (define diskpath (list "somepath" "someotherpath")), up to three
+(define diskpaths "/dev/plain/windows2000")
+;; or (define diskpaths (list "somepath" "someotherpath")), up to three
 ;; (or four if no cdrom is used) of them, they will be fed as -hda,
 ;; -hdd, -hdb, then -hdc in turn (in case you want to change the order
 ;; of how those are being used, you could re-define the driveoptions
