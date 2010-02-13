@@ -165,6 +165,8 @@
 
 (define (qemu)
   (define servicefolder (a ~/ "tmp/cj-qemucontrol/" servicename))
+  (if (not (-d servicefolder))
+      (create-directory servicefolder))
   (set! monitorfile (a servicefolder "/monitor"))
   (set! statefile (a servicefolder "/STATEFILE.gz"))
 
