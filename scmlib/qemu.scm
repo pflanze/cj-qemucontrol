@@ -172,5 +172,5 @@
 
   (if dry-run? 
       (println (script))
-      (apply bash-command (script) (command-line))))
+      (apply bash-command (script) args)))
 

@@ -14,8 +14,8 @@
 ;; You can prepend a string with your home directory path by using the ~ function:
 ;;  (define diskpath (~ "images/hda")) ;; where images is a subdir of your home
 
-;; By including this file into others (see the windows2000 and
-;; windows2000-smp files as examples) you can adapt the settings
+;; By including this file into others (see the example.scm and
+;; example-smp.scm files as examples) you can adapt the settings
 ;; selectively to different usages.
 
 ;; If you want to see what is going to be executed in bash syntax,
@@ -23,7 +23,6 @@
 ;; (define dry-run? #t)
 
 ;; required settings:
-(define servicename "windows2000")
 (define diskpath "/dev/plain/windows2000")
 ;; or (define diskpath (list "somepath" "someotherpath")), up to three
 ;; (or four if no cdrom is used) of them, they will be fed as -hda,
