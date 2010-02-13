@@ -12,9 +12,13 @@ BEGIN {
 }
 use lib "$mydir/perllib";
 
+our $defaultservicename="default";
+
 sub usage {
     print STDERR map{"$_\n"} @_ if @_;
-    print "$myname servicename
+    print "$myname [servicename]
+
+  servicename is assumed to be '$defaultservicename' if not specified
 
   (Christian Jaeger <$email>)
 ";
@@ -25,11 +29,16 @@ use Getopt::Long;
 our $verbose=0;
 GetOptions("verbose"=> \$verbose,
 	   "help"=> sub{usage},
-	   ) or exit 1;
-usage unless @ARGV==1;
-
-our ($servicename)=@ARGV;
-
+	  ) or exit 1;
+our ($servicename)= do {
+    if (@ARGV==1) {
+	$ARGV[0]
+    } elsif (@ARGV) {
+	usage
+    } else {
+	$defaultservicename
+    }
+};
 
 {
     package Chj::App::QemumonitorSuspend;
