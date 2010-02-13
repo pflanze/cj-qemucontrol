@@ -88,17 +88,17 @@
 	 (raise e)))
    (lambda ()
      (file-info path chase?))))
+
+(define (make--* type)
+  (lambda (path)
+    (cond ((maybe-file-info path #f)
+	   => (lambda (info)
+		(eq? (file-info-type info) type)))
+	  (else
+	   #f))))
   
-(define (-f path)
-  (cond ((maybe-file-info path #f)
-	 => (lambda (info)
-	      (case (file-info-type info)
-		((regular)
-		 #t)
-		(else
-		 #f))))
-	(else
-	 #f)))
+(define -f (make--* 'regular))
+(define -d (make--* 'directory))
 
 (define additional-options '())
 (define (add-options! . args)
