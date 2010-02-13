@@ -102,10 +102,10 @@
 	(else
 	 #f)))
 
-(define options '())
+(define additional-options '())
 (define (add-options! . args)
   ;; (could add then reverse in the end instead)
-  (set! options (append options args)))
+  (set! additional-options (append additional-options args)))
 
 (define redirections #f)
 (define use-tablet? #f)
@@ -136,7 +136,7 @@
 		  ,(if soundhw (j "-soundhw" soundhw "hda") "") ;; still dunno what the hda is for.
 		  ,tablet
 		  ,(or redirections "")
-		  ,@options))))
+		  ,@additional-options))))
     (xbash
      (b:limits)
      (if (-f statefile)
