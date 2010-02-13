@@ -34,7 +34,7 @@
 
 ;; optional settings (can be removed or set to #f):
 (define redirections "-redir tcp:3022::22")
-(define use-tablet #t)
+(define use-tablet? #t)
 (define win2k-hack? #t)
 (define soundhw #f)
 

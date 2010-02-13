@@ -108,14 +108,14 @@
   (set! options (append options args)))
 
 (define redirections #f)
-(define use-tablet #f)
+(define use-tablet? #f)
 (define win2k-hack? #f)
 (define soundhw #f)
 (define qemupath "qemu-system-x86_64")
 
 (define (script)
   (define monitorpath (a "unix:"monitorfile",server,nowait"))
-  (define tablet (if use-tablet "-usbdevice tablet" ""))
+  (define tablet (if use-tablet? "-usbdevice tablet" ""))
   (let ((qemucmdline
 	 (apply j
 		`(,qemupath
