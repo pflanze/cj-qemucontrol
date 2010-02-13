@@ -58,8 +58,8 @@
 (define virtual-memory-limit 1200000)
 (define driveoptions
   (list "-hda"
-	"-hdb"
 	"-hdd"
+	"-hdb"
 	;; man qemu: "you cannot use -hdc and -cdrom at the same time"!:
 	;; so, not sure, grr, how to make this into the code here
 	;; hmm. well maybe qemu will complain by itself.

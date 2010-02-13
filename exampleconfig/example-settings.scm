@@ -33,7 +33,7 @@
 (define diskpath "/dev/plain/windows2000")
 ;; or (define diskpath (list "somepath" "someotherpath")), up to three
 ;; (or four if no cdrom is used) of them, they will be fed as -hda,
-;; -hdb, -hdd, then -hdc in turn (in case you want to change the order
+;; -hdd, -hdb, then -hdc in turn (in case you want to change the order
 ;; of how those are being used, you could re-define the driveoptions
 ;; variable as part of your settings (check qemu.scm how it should
 ;; look)).
