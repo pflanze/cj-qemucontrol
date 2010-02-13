@@ -6,7 +6,7 @@ set -x
 (
     umask 077;
 
-    mkdir ~/tmp/
+    mkdir -p ~/tmp/cj-qemucontrol
 
-    mkdir ~/.cj-qemucontrol
+    mkdir -p ~/.cj-qemucontrol
 )

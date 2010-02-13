@@ -35,7 +35,7 @@ sub new {
     my $s=$cl->SUPER::new;
     ($$s[Servicename])= @_;
 
-    $$s[Servicefolder]= "$ENV{HOME}/tmp/".$s->servicesubfolder;
+    $$s[Servicefolder]= "$ENV{HOME}/tmp/cj-qemucontrol/".$s->servicesubfolder;
     -d $$s[Servicefolder]
       #or die "folder doesn't exit:
       or die "folder not accessible: '$$s[Servicefolder]': $!";

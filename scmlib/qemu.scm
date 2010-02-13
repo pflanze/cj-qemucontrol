@@ -164,7 +164,7 @@
 (define dry-run? #f)
 
 (define (qemu)
-  (define servicefolder (a ~/ "tmp/" servicename))
+  (define servicefolder (a ~/ "tmp/cj-qemucontrol/" servicename))
   (set! monitorfile (a servicefolder "/monitor"))
   (set! statefile (a servicefolder "/STATEFILE.gz"))
 
