@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# create directories if needed
+
+set -x
+(
+    umask 077;
+
+    mkdir ~/tmp/
+
+    mkdir ~/.cj-qemucontrol
+)
