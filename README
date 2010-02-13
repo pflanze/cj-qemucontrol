@@ -23,7 +23,7 @@ $servicename with the actual string you have choosen):
 
   See exampleconfig/example.scm and exampleconfig/example-smp.scm for
   examples of configurations that share a common base
-  configuration from exampleconfig/example-settings.scm; read the
+  configuration from exampleconfig/_example-common.scm; read the
   documentation in the latter file.
 
 - a directory ~/tmp/$servicename

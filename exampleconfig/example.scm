@@ -1,4 +1,4 @@
-;; see example-settings.scm for explanations
+;; see _example-common.scm for explanations
 
-(include "example-settings.scm")
+(include "_example-common.scm")
 (define smp #f)
