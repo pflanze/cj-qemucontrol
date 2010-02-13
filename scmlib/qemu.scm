@@ -1,5 +1,5 @@
 ;;hmm lib for settings
-(define (~ str)
+(define (~/ str)
   (string-append (getenv "HOME")
 		 "/" ;; os dependent? or not. marc says that not. so fine.
 		 str))
@@ -166,7 +166,7 @@
 (define dry-run? #f)
 
 (define (qemu)
-  (define servicefolder (~ (a "tmp/" servicename)))
+  (define servicefolder (~/ (a "tmp/" servicename)))
   (set! monitorfile (a servicefolder "/monitor"))
   (set! statefile (a servicefolder "/STATEFILE.gz"))
 
