@@ -1,0 +1,15 @@
+User-visible changes since 2010-02-08
+
+- changed way to do configuration; see README
+
+- configuration changes: 
+  - ~ has been renamed to ~/ and to be a string instead of a function
+  - use-tablet has been renamed to use-tablet?
+
+- the order of allocation of ide drives has changed; this means that
+  fstab entries inside the qemu instances may need to be changed!!
+
+  (Note that for these reasons it can be a good idea not to use the
+  /dev/hd* paths to refer to disks/partitions, but instead
+  /dev/disk/by-uuid/*)
+
