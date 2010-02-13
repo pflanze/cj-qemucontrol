@@ -12,11 +12,14 @@ Installation:
 - place the cj-qemucontrol directory wherever you like, and add it's
   path to the PATH environment variable
 
+- run the "q-init" script to let it create the directories 
+  ~/.cj-qemucontrol/ and ~/tmp/cj-qemucontrol/.
+
 
 Configuration:
 
 There can be multiple configurations per user; each configuration has
-a name, the "servicename". A configuration consists of (replace
+a name, the "servicename". Each configuration consists of (replace
 $servicename with the actual string you have choosen):
 
 - a file ~/.cj-qemucontrol/$servicename.scm
@@ -26,12 +29,10 @@ $servicename with the actual string you have choosen):
   configuration from exampleconfig/_example-common.scm; read the
   documentation in the latter file.
 
-- a directory ~/tmp/$servicename
+- a directory ~/tmp/cj-qemucontrol/$servicename/
 
-  Create this directory with the right protections to avoid giving
-  other users access to your qemu instance:
-
-    ( umask 077; mkdir -p ~/tmp/$servicename )
+  This directory is automatically created, assuming that
+  ~/tmp/cj-qemucontrol/ exists (which was created by q-init).
 
 The programs assume that you mean the configuration with servicename
 "default" if none is specified. This is practical when using a
