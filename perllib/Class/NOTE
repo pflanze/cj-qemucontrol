@@ -1,0 +1,3 @@
+Files that are not necessary for cj-qemucontrol have been
+removed. Revert the commit that introduced this file to get them back.
+
