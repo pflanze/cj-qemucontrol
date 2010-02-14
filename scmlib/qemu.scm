@@ -136,7 +136,9 @@
 		  ,(if soundhw (j "-soundhw" soundhw "hda") "")	;; still dunno what the hda is for.
 		  ,(if use-tablet? "-usbdevice tablet" "")
 		  ,(if net:nic-model
-		       (j "-net" (a "nic,model=" net:nic-model))
+		       (j "-net" (a "nic,model=" net:nic-model)
+			  ;; and the other part of the net pair:
+			  "-net" "user")
 		       "")
 		  ,(or redirections "")
 		  ,@additional-options))))
