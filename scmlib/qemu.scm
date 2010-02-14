@@ -115,7 +115,6 @@
 
 (define (script)
   (define monitorpath (a "unix:"monitorfile",server,nowait"))
-  (define tablet (if use-tablet? "-usbdevice tablet" ""))
   (let ((qemucmdline
 	 (apply j
 		`(,qemupath
@@ -135,7 +134,7 @@
 		  "-m" ,(q (->string ram-MB))
 		  ,(if smp (j "-smp" (->string smp)) "")
 		  ,(if soundhw (j "-soundhw" soundhw "hda") "")	;; still dunno what the hda is for.
-		  ,tablet
+		  ,(if use-tablet? "-usbdevice tablet" "")
 		  ,(if net:nic-model
 		       (j "-net" (a "nic,model=" net:nic-model))
 		       "")
