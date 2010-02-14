@@ -109,6 +109,8 @@
 (define use-tablet? #f)
 (define win2k-hack? #f)
 (define soundhw #f)
+(define net:nic-model "e1000")
+
 (define qemupath "qemu-system-x86_64")
 
 (define (script)
@@ -134,6 +136,9 @@
 		  ,(if smp (j "-smp" (->string smp)) "")
 		  ,(if soundhw (j "-soundhw" soundhw "hda") "")	;; still dunno what the hda is for.
 		  ,tablet
+		  ,(if net:nic-model
+		       (j "-net" (a "nic,model=" net:nic-model))
+		       "")
 		  ,(or redirections "")
 		  ,@additional-options))))
     (xbash

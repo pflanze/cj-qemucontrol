@@ -44,6 +44,7 @@
 (define use-tablet? #t)
 (define win2k-hack? #t)
 (define soundhw #f)
+;; (define net:nic-model "e1000");; if explicitely set to #f, no -net option will be issued
 
 ;; optional settings (they have default values, but can't be set to #f):
 ;;(define virtual-memory-limit 1200000)
