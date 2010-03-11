@@ -130,6 +130,13 @@
 
 (define qemupath "qemu-system-x86_64")
 
+(define uncompresscmd
+  (let ((res (bash-command "which pigz >/dev/null 2>&1")))
+    (case res
+      ((0) "pigz")
+      ((256) "gzip")
+      (else (error "error running which, exit/signal status:" res)))))
+
 (define (script)
   (define monitorpath (a "unix:"monitorfile",server,nowait"))
   (let ((qemucmdline
@@ -163,7 +170,7 @@
      (b:limits)
      (if (-f statefile)
 	 (lines "("
-		(j "gzip -c -d" (q statefile))
+		(j uncompresscmd "-c -d" (q statefile))
 		(j "mv" (q statefile) (q (a statefile ".old")))
 		(j ") |" qemucmdline "-incoming" (q "exec: cat") "\"$@\""))
 	 (j "exec" qemucmdline "\"$@\"")))))
