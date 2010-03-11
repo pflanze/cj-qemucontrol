@@ -159,11 +159,14 @@
 			       stderr-redirection: #f))))
     ;;HMM yeah and we would have wanted to pass back the exit status (again)
     ;;hmheh what is p btw?h
-    (let ((res (process-status p)))
-      (if (zero? res)
-	  (void)
-	  (error "bash exited with:" ;; str
-		 res)))))
+    (process-status p)))
+
+(define (xbash-command . args)
+  (let ((res (apply bash-command args)))
+    (if (zero? res)
+	(void)
+	(error "bash exited with:" ;; str
+	       res))))
 
 (define statefile #f)
 (define monitorfile #f)
@@ -179,5 +182,5 @@
 
   (if dry-run? 
       (println (script))
-      (apply bash-command (script) args)))
+      (apply xbash-command (script) args)))
 
