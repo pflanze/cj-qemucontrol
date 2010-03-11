@@ -4,6 +4,23 @@
 
 ;; ---- lib
 
+(define (bash-command str . args)
+  (let ((p (open-process (list path: "bash"
+			       arguments: (cons "-c" (cons str args))
+			       stdin-redirection: #f
+			       stdout-redirection: #f
+			       stderr-redirection: #f))))
+    ;;HMM yeah and we would have wanted to pass back the exit status (again)
+    ;;hmheh what is p btw?h
+    (process-status p)))
+
+(define (xbash-command . args)
+  (let ((res (apply bash-command args)))
+    (if (zero? res)
+	(void)
+	(error "bash exited with:" ;; str
+	       res))))
+
 (define (singlequote-sh str)
   (list->string
    (cons #\'
@@ -150,23 +167,6 @@
 		(j "mv" (q statefile) (q (a statefile ".old")))
 		(j ") |" qemucmdline "-incoming" (q "exec: cat") "\"$@\""))
 	 (j "exec" qemucmdline "\"$@\"")))))
-
-(define (bash-command str . args)
-  (let ((p (open-process (list path: "bash"
-			       arguments: (cons "-c" (cons str args))
-			       stdin-redirection: #f
-			       stdout-redirection: #f
-			       stderr-redirection: #f))))
-    ;;HMM yeah and we would have wanted to pass back the exit status (again)
-    ;;hmheh what is p btw?h
-    (process-status p)))
-
-(define (xbash-command . args)
-  (let ((res (apply bash-command args)))
-    (if (zero? res)
-	(void)
-	(error "bash exited with:" ;; str
-	       res))))
 
 (define statefile #f)
 (define monitorfile #f)
