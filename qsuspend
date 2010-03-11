@@ -40,6 +40,18 @@ our ($servicename)= do {
     }
 };
 
+our $compresscmd= do {
+    my $res= system "which pigz >/dev/null 2>&1";
+    if ($res==0) {
+	"pigz -b 3000"
+    } elsif ($res ==(1<<8)) {
+	# not found
+	"gzip"
+    } else {
+	die "error running which, exit/signal code $res";
+    }
+};
+
 {
     package Chj::App::QemumonitorSuspend;
     use Chj::App::Qemumonitor -extend=>
@@ -58,7 +70,7 @@ our ($servicename)= do {
 
     sub migratecommand {
 	my $s=shift;
-	'migrate "exec:gzip --fast -c > '.singlequote_sh($s->statefile_tmp).'"'
+	"migrate \"exec:$compresscmd --fast -c > ".singlequote_sh($s->statefile_tmp)."\""
     }
 
     end Class::Array;
