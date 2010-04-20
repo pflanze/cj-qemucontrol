@@ -72,7 +72,6 @@
   (apply lines "set -eu" args))
 
 ;; to the toplevel so as to make it overridable by user config:
-(define virtual-memory-limit 1200000)
 (define driveoptions
   (list "-hda"
 	"-hdd"
@@ -82,8 +81,26 @@
 	;; hmm. well maybe qemu will complain by itself.
 	"-hdc"))
 
+
+(define (integer x)
+  (inexact->exact (round x)))
+
+(define (virtual-memory-limit)
+  ;; give some more memory than what qemu will offer in the vm, for
+  ;; both some (hypothetic) overhead (pagetables?well.whatever) and on
+  ;; top of that some constant (for the qemu 'binary'/processing
+  ;; memory)
+
+  ;; (Actually the limit to just start a 1024MB instance in one case
+  ;; instance was factor 1.15 and add 0)
+  (define (MiB->KiB x)
+    (* x 1024))
+  (integer
+   (+ (* (MiB->KiB ram-MB) 1.2)
+      (MiB->KiB 200))))
+
 (define (b:limits)
-  (a "ulimit -S -v " (->string virtual-memory-limit)))
+  (a "ulimit -S -v " (->string (virtual-memory-limit))))
 
 (define (b:set var val)
   (a var "="
