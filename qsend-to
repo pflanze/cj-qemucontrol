@@ -14,9 +14,10 @@ use lib "$mydir/perllib";
 
 sub usage {
     print STDERR map{"$_\n"} @_ if @_;
-    print "$myname servicename key[s]
+    print "$myname servicename command [args]
 
-  key can be something like: ctrl-alt-f1
+  command and args can be something like:
+    sendkey ctrl-alt-f1
 
   (Christian Jaeger <$email>)
 ";
@@ -39,12 +40,13 @@ use Chj::App::Qemumonitor;
 our $m= Chj::App::Qemumonitor->new($servicename);
 $m->set_verbose(1) if $verbose;#wl. keyword passing. or.  hh oldie.
 
-sub sendkey {
-    my ($key)=@_;
-    $m->send ("sendkey $key");
+sub Send {
+    my (@cmd)=@_;
+    my $cmd= join(" ",@cmd); #well? todo find out whether there is a general solution
+    $m->send ($cmd);
 }
 
-sendkey $_ for @ARGV;
+Send @ARGV;
 
 #use Chj::ruse;
 #use Chj::Backtrace;
