@@ -1,0 +1,51 @@
+#!/usr/bin/perl -w
+
+# Sat May  1 14:52:17 EDT 2010
+(my $email='chrjae%gmail,com')=~ tr/%,/@./;
+
+use strict;
+
+my ($mydir, $myname);
+BEGIN {
+    $0=~ /(.*?)([^\/]+)\z/s or die "?";
+    ($mydir, $myname)=($1,$2);
+}
+use lib "$mydir/perllib";
+
+sub usage {
+    print STDERR map{"$_\n"} @_ if @_;
+    print "$myname [servicename]
+
+  Open the qemu 'repl' ('shell') of the given qemu instance (or default).
+
+  (Christian Jaeger <$email>)
+";
+exit (@_ ? 1 : 0);
+}
+
+use Getopt::Long;
+our $verbose=0;
+#our $opt_dry;
+GetOptions("verbose"=> \$verbose,
+	   "help"=> sub{usage},
+	   #"dry-run"=> \$opt_dry,
+	   ) or exit 1;
+usage unless @ARGV<=1;
+
+our ($maybe_servicename)=@ARGV;
+
+our $servicename= $maybe_servicename||"default";
+
+use Chj::App::Qemumonitor;
+
+our $m= Chj::App::Qemumonitor->new($servicename);
+
+our $socketpath= $m->monitorsocketpath;
+
+use Chj::xperlfunc;
+
+xexec "rlwrap", "socat", $socketpath, "-";
+
+#use Chj::ruse;
+#use Chj::Backtrace;
+#use Chj::repl; repl;
