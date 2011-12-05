@@ -43,7 +43,7 @@ our ($servicename)= do {
 our $compresscmd= do {
     my $res= system "which pigz >/dev/null 2>&1";
     if ($res==0) {
-	"bfr | pigz -b 3000"
+	"pigz -b 3000"
     } elsif ($res ==(1<<8)) {
 	# not found
 	"gzip"
