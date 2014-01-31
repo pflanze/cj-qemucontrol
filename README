@@ -43,6 +43,10 @@ servicename.
 The qemu binary name is "qemu-system-x86_64" by default, override in
 the configuration (or change it in qemu.scm).
 
+Note that when suspending $servicename, the RAM image is written to
+~/tmp/cj-qemucontrol/$servicename/STATEFILE.gz, thus make sure that
+this directory is on a file system with enough disk space.
+
 
 Usage:
 
