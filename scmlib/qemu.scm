@@ -97,7 +97,7 @@
     (* x 1024))
   (integer
    (+ (* (MiB->KiB ram-MB) 1.2)
-      (MiB->KiB 200))))
+      (MiB->KiB 400))))
 
 (define (b:limits)
   (a "ulimit -S -v " (->string (virtual-memory-limit))))
