@@ -184,6 +184,7 @@
 		  ,(or redirections "")
 		  ,@additional-options))))
     (xbash
+     "set -x"
      (b:limits)
      (if (-f statefile)
 	 (lines "("
