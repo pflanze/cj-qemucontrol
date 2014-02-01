@@ -159,6 +159,7 @@
   (let ((qemucmdline
 	 (apply j
 		`(,qemupath
+		  "-enable-kvm" ;; XXX config
 		  "-no-quit"
 		  "-monitor" ,(q monitorpath)
 		  "-alt-grab"
