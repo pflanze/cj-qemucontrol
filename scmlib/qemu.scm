@@ -160,6 +160,7 @@
 	 (apply j
 		`(,qemupath
 		  "-enable-kvm" ;; XXX config
+		  "-cpu" "host" ;; XXX config
 		  "-no-quit"
 		  "-monitor" ,(q monitorpath)
 		  "-alt-grab"
