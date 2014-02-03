@@ -181,7 +181,12 @@
 		  ,(if net:nic-model
 		       (j "-net" (a "nic,model=" net:nic-model)
 			  ;; and the other part of the net pair:
-			  "-net" "user")
+			  (case net:type
+			    ((user) (j "-net" "user"))
+			    ((tap) (j "-net"
+				      (a "tap,vlan=0,ifname=" net:tap-device)))
+			    (else
+			     (error "unknown net:type: " net:type))))
 		       "")
 		  ,(or redirections "")
 		  ,@additional-options))))

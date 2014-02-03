@@ -39,11 +39,17 @@
 ;; look)).
 (define ram-MB 384)
 
+(define net:type 
+  ;; 'user or 'tap
+  'user)
+;;(define net:tap-device "tap0");; only necessary with net:type set to 'tap
+
 ;; optional settings (can be removed or set to #f):
 (define redirections "-redir tcp:3022::22")
 (define use-tablet? #t)
 (define win2k-hack? #t)
 (define soundhw #f)
+
 ;; (define net:nic-model "e1000");; if explicitely set to #f, no -net option will be issued
 
 ;; optional settings (they have default values, but can't be set to #f):
