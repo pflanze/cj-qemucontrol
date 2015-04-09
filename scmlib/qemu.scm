@@ -84,15 +84,22 @@
 (define (disks_ #!key hda hdb hdc hdd cdrom)
   (if (and hdc cdrom)
       (error "according to man qemu, -hdc and -cdrom can't be used at the same time"))
-  (lambda (msg)
-    (case msg
-      ((alist)
-       (filter cdr
-	       `((hda . ,hda)
-		 (hdb . ,hdb)
-		 (hdc . ,hdc)
-		 (hdd . ,hdd)
-		 (cdrom . ,cdrom)))))))
+  (let ((ali (filter cdr
+		     `((hda . ,hda)
+		       (hdb . ,hdb)
+		       (hdc . ,hdc)
+		       (hdd . ,hdd)
+		       (cdrom . ,cdrom)))))
+    (for-each (lambda (n+v)
+		(or (string? (cdr n+v))
+		    (error "value for disk must be a path string:"
+			   (car n+v)
+			   (cdr n+v))))
+	      ali)
+    (lambda (msg)
+      (case msg
+	((alist) ali)
+	(else (error "unknown message"))))))
 
 
 (define (integer x)
