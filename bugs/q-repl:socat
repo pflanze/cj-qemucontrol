@@ -1,0 +1,4 @@
+What's the problem?
+
+    $ q-repl testing-apr15
+    rlwrap: Cannot execute socat: Permission denied
