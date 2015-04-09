@@ -1,4 +1,9 @@
-User-visible changes since 2010-02-08
+Changes since  2010-02-13
+
+- replaced |diskpaths| with |disks|, added |disks_| function
+
+
+Changes since 2010-02-08
 
 - changed way to do configuration; see README
 

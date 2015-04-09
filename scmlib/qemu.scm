@@ -71,16 +71,28 @@
 (define (xbash . args)
   (apply lines "set -eu" args))
 
-;; to the toplevel so as to make it overridable by user config:
-(define driveoptions
-  (list "-hda"
-	"-cdrom"
-	"-hdd"
-	"-hdb"
-	;; man qemu: "you cannot use -hdc and -cdrom at the same time"!:
-	;; so, not sure, grr, how to make this into the code here
-	;; hmm. well maybe qemu will complain by itself.
-	"-hdc"))
+
+(define (filter fn xs)
+  (if (null? xs)
+      xs
+      (let ((r (filter fn (cdr xs))))
+	(if (fn (car xs))
+	    (cons (car xs) r)
+	    r))))
+
+
+(define (disks_ #!key hda hdb hdc hdd cdrom)
+  (if (and hdc cdrom)
+      (error "according to man qemu, -hdc and -cdrom can't be used at the same time"))
+  (lambda (msg)
+    (case msg
+      ((alist)
+       (filter cdr
+	       `((hda . ,hda)
+		 (hdb . ,hdb)
+		 (hdc . ,hdc)
+		 (hdd . ,hdd)
+		 (cdrom . ,cdrom)))))))
 
 
 (define (integer x)
@@ -166,15 +178,10 @@
 		  "-monitor" ,(q monitorpath)
 		  "-alt-grab"
 		  ,(if win2k-hack? "-win2k-hack" "")
-		  ,@(map-accepting-shorter-lis2
-		     (lambda (driveoption path)
-		       (j driveoption (q path)))
-		     driveoptions
-		     (cond ((list? diskpaths)
-			    diskpaths)
-			   ((string? diskpaths)
-			    (list diskpaths))
-			   (else (error "diskpaths must be a list of strings or a string"))))
+		  ,@(map (lambda (drivename.path)
+			   (j (a "-" (symbol->string (car drivename.path)))
+			      (cdr drivename.path)))
+			 (disks 'alist))
 		  "-m" ,(q (->string ram-MB))
 		  ,(if smp (j "-smp" (->string smp)) "")
 		  ,(if soundhw (j "-soundhw" soundhw "hda") "")	;; still dunno what the hda is for.
