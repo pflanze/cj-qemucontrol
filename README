@@ -55,12 +55,12 @@ Usage:
    start instance with control socket so that it can be suspended,
    resuming from image if present.
 
- qsuspend [servicename]
+ q-suspend [servicename]
 
    suspend instance
 
- qsendkey-to servicename key(s)
- qsendkey key(s)
+ q-sendkey-to servicename key(s)
+ q-sendkey key(s)
 
    send keyboard signals, especially worthwhile for keys that can't be typed in
    normally like ctrl-alt-f1
