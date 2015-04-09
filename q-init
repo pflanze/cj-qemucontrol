@@ -10,3 +10,5 @@ set -x
 
     mkdir -p ~/.cj-qemucontrol
 )
+
+# ! keep in sync with q-rename !

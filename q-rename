@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -euo pipefail
+IFS=
+# remember, *still* need to quote variables!
+
+usage () {
+    echo "usage: $0 fromname toname"
+    echo "  rename the config and state files of a configuration to a new name"
+    exit 1
+}
+
+if [ $# -ne 2 ]; then
+    usage
+fi
+
+from=$1
+to=$2
+
+set -x
+
+# ! keep in sync with q-init !
+
+mv ~/.cj-qemucontrol/{"$from","$to"}.scm
+
+mv ~/tmp/cj-qemucontrol/{"$from","$to"}
+
+set +x
+echo ok.
