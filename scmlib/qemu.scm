@@ -74,6 +74,7 @@
 ;; to the toplevel so as to make it overridable by user config:
 (define driveoptions
   (list "-hda"
+	"-cdrom"
 	"-hdd"
 	"-hdb"
 	;; man qemu: "you cannot use -hdc and -cdrom at the same time"!:
