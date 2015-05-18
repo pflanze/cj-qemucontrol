@@ -1,0 +1,15 @@
+#!/bin/bash
+
+usage () {
+    echo "$0 [servicename]"
+    echo "  stop (poweroff) servicename"
+    exit 1
+}
+
+if [ $# -gt 1 -o "$1" = "-h" -o "$1" = "--help" ]; then
+    usage
+fi
+
+servicename="${1-default}"
+
+q-send-to "$servicename"  quit
