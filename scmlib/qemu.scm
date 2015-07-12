@@ -116,7 +116,7 @@
   (define (MiB->KiB x)
     (* x 1024))
   (integer
-   (+ (* (MiB->KiB ram-MB) 1.4)
+   (+ (* (MiB->KiB ram-MB) 1.5)
       (MiB->KiB 400))))
 
 (define (b:limits)
