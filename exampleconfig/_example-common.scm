@@ -57,3 +57,7 @@
 ;; (add-options! "-someoptionwithvalue" "optionvalue")
 ;; or just
 ;; (add-options! "-someoptionwithoutvalue")
+
+;; The base folder to put the command socket and state files (a
+;; subfolder named after the service will be created automatically):
+;; (define servicefolder (a ~/ "tmp/cj-qemucontrol/"))

@@ -220,8 +220,9 @@
 
 (define dry-run? #f)
 
+(define servicefolder (a ~/ "tmp/cj-qemucontrol/" servicename)) ;; default value
+
 (define (qemu)
-  (define servicefolder (a ~/ "tmp/cj-qemucontrol/" servicename))
   (if (not (-d servicefolder))
       (create-directory servicefolder))
   (set! monitorfile (a servicefolder "/monitor"))
