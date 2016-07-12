@@ -2,6 +2,9 @@
 (define ~/
   (string-append (getenv "HOME") "/"))
 
+(define (~ str)
+  (string-append ~/ str))
+
 ;; ---- lib
 
 (define (bash-command str . args)
