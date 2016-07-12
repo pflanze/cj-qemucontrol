@@ -168,6 +168,33 @@
 (define soundhw #f)
 (define net:nic-model "e1000")
 
+;; -display type
+(define display-type #f) ;; symbol
+
+(define (display-type? v)
+  (case v
+    ((sdl curses none gtk vnc) #t)
+    (else #f)))
+
+(define full-screen? #f)
+
+;; -vga type
+(define vga-type #f) ;; symbol, e.g. 'std
+
+(define (vga-type? v)
+  (case v
+    ((cirrus std vmware qxl tcx cg3 none) #t)
+    (else #f)))
+
+;; -g widthxheight[xdepth]
+(define resolution #f) ;; string like "1920x1080"
+
+(define (resolution? v)
+  (and (string? v)
+       ;; XX test for format?
+       #t))
+
+
 (define qemupath "qemu-system-x86_64")
 
 (define uncompresscmd
@@ -205,6 +232,24 @@
 				      (a "tap,vlan=0,ifname=" net:tap-device)))
 			    (else
 			     (error "unknown net:type: " net:type))))
+		       "")
+		  ,(if display-type
+		       (if (display-type? display-type)
+			   (string-append "-display " (symbol->string display-type))
+			   (errpr "not a display-type:" display-type))
+		       "")
+		  ,(if full-screen? ;; XX check for boolean?
+		       "-full-screen"
+		       "")
+		  ,(if vga-type
+		       (if (vga-type? vga-type)
+			   (string-append "-vga " (symbol->string vga-type))
+			   (error "not a vga-type (expecting a symbol):" vga-type))
+		       "")
+		  ,(if resolution
+		       (if (resolution? resolution)
+			   (string-append "-g " (singlequote-sh resolution))
+			   (error "not a resolution (expecting a string):" resolution))
 		       "")
 		  ,(or redirections "")
 		  ,@additional-options))))
