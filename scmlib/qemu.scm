@@ -221,7 +221,7 @@
 			 (disks 'alist))
 		  "-m" ,(q (->string ram-MB))
 		  ,(if smp (j "-smp" (->string smp)) "")
-		  ,(if soundhw (j "-soundhw" soundhw "hda") "")	;; still dunno what the hda is for.
+		  ,(if soundhw (j "-soundhw" soundhw ) "")
 		  ,(if use-tablet? "-usbdevice tablet" "")
 		  ,(if net:nic-model
 		       (j "-net" (a "nic,model=" net:nic-model)
