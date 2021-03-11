@@ -10,7 +10,7 @@ Installation:
   systems as source or binaries on the Gambit home page.
 
 - place the cj-qemucontrol directory wherever you like, and add it's
-  path to the PATH environment variable
+  bin/ subdirectory path to the PATH environment variable
 
 - run the "q-init" script to let it create the directories 
   ~/.cj-qemucontrol/ and ~/tmp/cj-qemucontrol/.
