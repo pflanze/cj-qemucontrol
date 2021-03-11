@@ -229,7 +229,7 @@
 			  (case net:type
 			    ((user) (j "-net" "user"))
 			    ((tap) (j "-net"
-				      (a "tap,vlan=0,ifname=" net:tap-device)))
+				      (a "tap,ifname=" net:tap-device)))
 			    (else
 			     (error "unknown net:type: " net:type))))
 		       "")
