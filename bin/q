@@ -12,7 +12,7 @@
     (begin
       (set! servicename "default")))
 
-(include "scmlib/qemu.scm")
+(include "../scmlib/qemu.scm")
 
 (eval
  `(include ,(a ~/ ".cj-qemucontrol/" servicename ".scm")))

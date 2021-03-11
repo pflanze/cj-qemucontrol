@@ -10,7 +10,7 @@ BEGIN {
     $0=~ /(.*?)([^\/]+)\z/s or die "?";
     ($mydir, $myname)=($1,$2);
 }
-use lib "$mydir/perllib";
+use lib "$mydir/../perllib";
 
 sub usage {
     print STDERR map{"$_\n"} @_ if @_;
