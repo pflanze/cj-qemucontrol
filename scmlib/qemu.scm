@@ -222,7 +222,7 @@
 		  "-m" ,(q (->string ram-MB))
 		  ,(if smp (j "-smp" (->string smp)) "")
 		  ,(if soundhw (j "-soundhw" soundhw ) "")
-		  ,(if use-tablet? "-usbdevice tablet" "")
+		  ,(if use-tablet? "-usb -device usb-tablet" "")
 		  ,(if net:nic-model
 		       (j "-net" (a "nic,model=" net:nic-model)
 			  ;; and the other part of the net pair:
